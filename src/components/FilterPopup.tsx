@@ -4,7 +4,7 @@ import React from "react";
 interface FilterPopupProps {
   isOpen: boolean;
   onClose: () => void;
-  selectedCategory: string | null;
+  selectedCategory: keyof typeof filters | null;
   onCategorySelect: (category: string) => void;
 }
 
@@ -21,7 +21,7 @@ const FilterPopup: React.FC<FilterPopupProps> = ({ isOpen, onClose, selectedCate
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-opacity-50 flex justify-start items-start p-4 ">
+    <div className="fixed inset-0 z-50 bg-gray-700 bg-opacity-30 flex justify-start items-start p-4">
       <div className="bg-white w-80 p-6 rounded-lg shadow-lg">
         <h2 className="text-xl font-bold text-gray-900 mb-4">Kategoriler</h2>
         <ul className="space-y-2">
@@ -37,7 +37,7 @@ const FilterPopup: React.FC<FilterPopupProps> = ({ isOpen, onClose, selectedCate
           ))}
         </ul>
 
-        {selectedCategory && (
+        {selectedCategory && filters[selectedCategory] && (
           <div>
             <h3 className="text-lg font-bold text-gray-900 mt-4">Filtreler</h3>
             <div className="space-y-2">
